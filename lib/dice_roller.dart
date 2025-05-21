@@ -42,7 +42,10 @@ class _DiceRollerState extends State<DiceRoller> {
             Padding(padding: EdgeInsets.all(15)),
             IconButton(
               onPressed: () {},
-              icon: Image.asset("dice_images/dice-six-faces-2.png"),
+              icon: Image.asset(
+                "dice_images/dice-six-faces-2.png",
+                cacheHeight: 100,
+              ),
             ),
             //Image.asset(diceNumber2, cacheHeight: 100),
           ],
