@@ -23,6 +23,7 @@ class _DiceRollerState extends State<DiceRoller> {
     setState(() {
       currentDiceRoll = randomizer.nextInt(6) + 1;
       //diceNumber1 = "dice_images/dice-six-faces-6.png";
+      throwsLeft--;
     });
   }
 
@@ -39,7 +40,11 @@ class _DiceRollerState extends State<DiceRoller> {
               cacheHeight: 100,
             ),
             Padding(padding: EdgeInsets.all(15)),
-            Image.asset(diceNumber2, cacheHeight: 100),
+            IconButton(
+              onPressed: () {},
+              icon: Image.asset("dice_images/dice-six-faces-2.png"),
+            ),
+            //Image.asset(diceNumber2, cacheHeight: 100),
           ],
         ),
         Padding(padding: EdgeInsets.all(15)),
