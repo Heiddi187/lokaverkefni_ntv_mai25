@@ -7,15 +7,52 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Appbar kannski þarf ekki')),
+      appBar: AppBar(
+        title: const Text('Appbar í startscreen kannski þarf ekki'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: () {}, child: Text("Takki 1")),
-            ElevatedButton(onPressed: () {}, child: Text("Takki 2")),
-            ElevatedButton(onPressed: () {}, child: Text("Takki 3")),
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("Traditional Yahtzee"),
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey.shade300,
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Upper & lower \$4.99",
+                  style: TextStyle(decoration: TextDecoration.lineThrough),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey.shade300,
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Free selection \$9.99",
+                  style: TextStyle(decoration: TextDecoration.lineThrough),
+                ),
+              ),
+            ),
           ],
         ),
       ),

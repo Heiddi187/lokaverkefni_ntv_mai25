@@ -66,7 +66,9 @@ class _DiceRollerState extends State<DiceRoller> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("teningar læstir: ${diceLocked.where((locked) => locked).length}"),
+        Text(
+          "locked dice: ${diceLocked.where((locked) => locked).length}",
+        ), //                                           teningar læstir
         Text(
           "${diceValues[0].toString()}, ${diceValues[1].toString()}, ${diceValues[2].toString()}, ${diceValues[3].toString()}, ${diceValues[4].toString()},",
         ),
@@ -92,11 +94,11 @@ class _DiceRollerState extends State<DiceRoller> {
         SizedBox(height: 30),
         ElevatedButton(
           onPressed: diceRoll,
-          child: Text("throw", style: TextStyle(fontSize: 20)),
+          child: Text("throw", style: TextStyle(fontSize: 20)), //    kasta
         ),
         SizedBox(height: 20),
         Text(
-          "köst eftir :$throwsLeft",
+          "throws left :$throwsLeft", //                        köst eftir
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ],
