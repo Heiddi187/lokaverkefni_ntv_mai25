@@ -11,20 +11,54 @@ class DiceRoller extends StatefulWidget {
 }
 
 class _DiceRollerState extends State<DiceRoller> {
-  var diceNumber1 = "dice_images/dice-six-faces-1.png";
-  var diceNumber2 = "dice_images/dice-six-faces-2.png";
-  var diceNumber3 = "dice_images/dice-six-faces-5.png";
-  var diceNumber4 = "dice_images/dice-six-faces-3.png";
-  var diceNumber5 = "dice_images/dice-six-faces-4.png";
-  var currentDiceRoll = 1;
+  int currentDiceRoll = 1;
   int throwsLeft = 3;
+  List<int> diceValues = [1, 1, 1, 1, 1];
+  List<bool> diceLocked = [false, false, false, false, false];
+  bool hasRolled = false;
 
   void diceRoll() {
+    if (throwsLeft == 0) return;
+
     setState(() {
-      currentDiceRoll = randomizer.nextInt(6) + 1;
-      //diceNumber1 = "dice_images/dice-six-faces-6.png";
+      for (int i = 0; i < 5; i++) {
+        if (!diceLocked[i]) {
+          diceValues[i] = randomizer.nextInt(6) + 1;
+        }
+      }
       throwsLeft--;
+      hasRolled = true;
     });
+  }
+
+  void dieIsLocked(int index) {
+    if (!hasRolled) return;
+
+    setState(() {
+      diceLocked[index] = !diceLocked[index];
+    });
+  }
+
+  Widget buildDie(int index) {
+    return IconButton(
+      onPressed: hasRolled ? () => dieIsLocked(index) : null,
+      iconSize: 100,
+      icon: Stack(
+        children: [
+          Text("${diceValues[0].toString()}"),
+          Image.asset(
+            "dice_images/dice-six-faces-${diceValues[index]}.png",
+            height: 100,
+          ),
+          if (diceLocked[index])
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.black.withValues(alpha: 0.5),
+            ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -32,30 +66,27 @@ class _DiceRollerState extends State<DiceRoller> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text("teningar læstir: ${diceLocked.where((locked) => locked).length}"),
+        Text(
+          "${diceValues[0].toString()}, ${diceValues[1].toString()}, ${diceValues[2].toString()}, ${diceValues[3].toString()}, ${diceValues[4].toString()},",
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "dice_images/dice-six-faces-$currentDiceRoll.png",
-              cacheHeight: 100,
-            ),
+            buildDie(0),
             Padding(padding: EdgeInsets.all(15)),
-            Image.asset(
-              "dice_images/dice-six-faces-$currentDiceRoll.png",
-              cacheHeight: 100,
-            ),
-            //Image.asset(diceNumber2, cacheHeight: 100),
+            buildDie(1),
           ],
         ),
         Padding(padding: EdgeInsets.all(15)),
-        Image.asset(diceNumber3, cacheHeight: 100),
+        buildDie(2),
         Padding(padding: EdgeInsets.all(15)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(diceNumber4, cacheHeight: 100),
+            buildDie(3),
             Padding(padding: EdgeInsets.all(15)),
-            Image.asset(diceNumber5, cacheHeight: 100),
+            buildDie(4),
           ],
         ),
         SizedBox(height: 30),
