@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'round_aces.dart';
 
 class YahtzeeList extends StatefulWidget {
   const YahtzeeList({super.key});
@@ -25,7 +26,14 @@ class _YahtzeeListState extends State<YahtzeeList> {
                 SizedBox(
                   width: 250,
                   height: 50,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Aces")),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).push(MaterialPageRoute(builder: (ctx) => RoundAces()));
+                    },
+                    child: Text("Aces"),
+                  ),
                 ),
                 SizedBox(
                   width: 250,

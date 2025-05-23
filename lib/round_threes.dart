@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/round_twos.dart';
+import 'package:lokaverkefni/round_fours.dart';
 import 'dart:math';
 
 import 'package:lokaverkefni/yahtzee_list.dart';
 
 final randomizer = Random();
 
-class RoundAces extends StatefulWidget {
-  const RoundAces({super.key});
+class RoundThrees extends StatefulWidget {
+  const RoundThrees({super.key});
 
   @override
-  State<RoundAces> createState() => _RoundAcesState();
+  State<RoundThrees> createState() => _RoundThreesState();
 }
 
-class _RoundAcesState extends State<RoundAces> {
+class _RoundThreesState extends State<RoundThrees> {
   List<int> diceValues = [1, 1, 1, 1, 1];
   List<bool> diceLocked = [false, false, false, false, false];
   int throwsLeft = 3;
@@ -49,7 +49,7 @@ class _RoundAcesState extends State<RoundAces> {
 
   void calculateScore() {
     score = diceValues
-        .where((value) => value == 1)
+        .where((value) => value == 3)
         .fold(0, (sum, value) => sum + value);
     showScore = true;
   }
@@ -79,7 +79,7 @@ class _RoundAcesState extends State<RoundAces> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Aces Round (count 1's)")),
+      appBar: AppBar(title: Text("Threes Round (count 3's)")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -108,7 +108,7 @@ class _RoundAcesState extends State<RoundAces> {
               onPressed: () {
                 Navigator.of(
                   context,
-                ).push(MaterialPageRoute(builder: (ctx) => RoundTwos()));
+                ).push(MaterialPageRoute(builder: (ctx) => RoundFours()));
               },
               child: Text("Next Round"),
             ),
