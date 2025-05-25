@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lokaverkefni/round_fours.dart';
 import 'dart:math';
 
-import 'package:lokaverkefni/yahtzee_list.dart';
-
 final randomizer = Random();
 
 class RoundThrees extends StatefulWidget {
