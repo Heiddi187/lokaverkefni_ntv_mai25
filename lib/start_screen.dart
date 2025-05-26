@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dice_roller.dart';
+import 'package:lokaverkefni/yahtzee_list.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -19,7 +19,11 @@ class StartScreen extends StatelessWidget {
               width: 250,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const YahtzeeList()),
+                  );
+                },
                 child: Text("Traditional Yahtzee"),
               ),
             ),

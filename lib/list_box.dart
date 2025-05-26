@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'yahtzee_list.dart';
 
-class listBox extends StatelessWidget {
-  listBox({
+class YahtzeeListBox extends StatelessWidget {
+  const YahtzeeListBox({
     required this.roundTitle,
     required this.roundRules,
     required this.whichRound,
     super.key,
   });
-  String roundTitle;
-  String roundRules;
-  Widget whichRound;
+  final String roundTitle;
+  final String roundRules;
+  final Widget whichRound;
 
   @override
   Widget build(BuildContext context) {

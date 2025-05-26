@@ -27,7 +27,7 @@ void main() {
           ),
         ),
       ),
-      home: Scaffold(body: YahtzeeList()),
+      home: Scaffold(body: StartScreen()),
     ),
   );
 }

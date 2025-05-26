@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lokaverkefni/round_threes.dart';
 import 'dice_build.dart';
 
-import 'package:lokaverkefni/yahtzee_list.dart';
-
 class RoundTwos extends StatefulWidget {
   const RoundTwos({super.key});
 
