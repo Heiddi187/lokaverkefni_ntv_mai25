@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lokaverkefni/chance.dart';
+import 'package:lokaverkefni/four_of_a_kind.dart';
+import 'package:lokaverkefni/full_house.dart';
+import 'package:lokaverkefni/large_straight.dart';
+import 'package:lokaverkefni/round_fives.dart';
+import 'package:lokaverkefni/round_fours.dart';
+import 'package:lokaverkefni/round_sixes.dart';
+import 'package:lokaverkefni/round_threes.dart';
+import 'package:lokaverkefni/round_twos.dart';
+import 'package:lokaverkefni/small_straight.dart';
+import 'package:lokaverkefni/three_of_a_kind.dart';
+import 'package:lokaverkefni/yahtzee.dart';
 import 'round_aces.dart';
+import 'list_box.dart';
 
 class YahtzeeList extends StatefulWidget {
   const YahtzeeList({super.key});
@@ -15,110 +28,96 @@ class _YahtzeeListState extends State<YahtzeeList> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("How to play Yahtzee"),
+          Text(
+            "How to play Yahtzee",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
           SizedBox(height: 20),
           SizedBox(
             width: MediaQuery.of(context).size.width * 2 / 3,
             height: MediaQuery.of(context).size.height * 1 / 2,
             child: ListView(
               children: [
-                Text("Upper row"),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(
-                        context,
-                      ).push(MaterialPageRoute(builder: (ctx) => RoundAces()));
-                    },
-                    child: Text("Aces"),
-                  ),
+                Text(
+                  "Upper row",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Twos")),
+                listBox(
+                  roundTitle: "Aces",
+                  roundRules: "only counts 1's",
+                  whichRound: RoundAces(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Threes"),
-                  ),
+                listBox(
+                  roundTitle: "Twos",
+                  roundRules: "only counts 2's",
+                  whichRound: RoundTwos(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Fours")),
+                listBox(
+                  roundTitle: "Threes",
+                  roundRules: "only counts 3's",
+                  whichRound: RoundThrees(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Fives")),
+                listBox(
+                  roundTitle: "Fours",
+                  roundRules: "only counts 4's",
+                  whichRound: RoundFours(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Sixes")),
+                listBox(
+                  roundTitle: "Fives",
+                  roundRules: "only counts 5's",
+                  whichRound: RoundFives(),
                 ),
-                Text("Lower row"),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("3 of a kind"),
-                  ),
+                listBox(
+                  roundTitle: "Sixes",
+                  roundRules: "only counts 6's",
+                  whichRound: RoundSixes(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("4 of a kind"),
-                  ),
+                Text(
+                  "Lower row",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Full house"),
-                  ),
+                listBox(
+                  roundTitle: "3 of a kind",
+                  roundRules:
+                      "if you get three or more of the same number your score will be the total of all five dice \n( 5 + 5 + 5 + 1 + 2 = 18 )",
+                  whichRound: ThreeOfaKind(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Small straight"),
-                  ),
+                listBox(
+                  roundTitle: "4 of a kind",
+                  roundRules:
+                      "if you get four or more of the same number your score will be the total of all five dice\n( 5 + 5 + 5 + 5 + 2 = 22 )",
+                  whichRound: FourOfaKind(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Large straight"),
-                  ),
+                listBox(
+                  roundTitle: "Full House",
+                  roundRules:
+                      "if you get three of one number and two of another you score 25 points, otherwise 0 \n( 1 + 1 + 1 + 2 + 2 = 25 )",
+                  whichRound: FullHouse(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Yahtzee"),
-                  ),
+                listBox(
+                  roundTitle: "Small Straight",
+                  roundRules:
+                      "if you get a sequence of four numbers you score 30 points, otherwise 0 \n( 1 + 2 + 3 + 4 + any = 30 )\n( 2 + 3 + 4 + 5 + any = 30 )\n( 3 + 4 + 5 + 6 + any = 30 )",
+                  whichRound: SmallStraight(),
                 ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Chance"),
-                  ),
+                listBox(
+                  roundTitle: "Large Straight",
+                  roundRules:
+                      "if you get a sequence of five numbers you score 40 points, otherwise 0 \n( 1 + 2 + 3 + 4 + 5 = 40 )\n( 2 + 3 + 4 + 5 + 6 = 40 )",
+                  whichRound: LargeStraight(),
+                ),
+                listBox(
+                  roundTitle: "Yahtzee",
+                  roundRules:
+                      "if you get five of the same number you score 50 points \n( 5 + 5 + 5 + 5 + 5 = 50 )",
+                  whichRound: FullYahtzee(),
+                ),
+                listBox(
+                  roundTitle: "Chance",
+                  roundRules: "the total of all five dice",
+                  whichRound: ChanceRound(),
                 ),
               ],
             ),

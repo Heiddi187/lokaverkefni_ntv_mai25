@@ -187,22 +187,25 @@ class _DiceSetState extends State<DiceSet> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        //Text("Locked: ${diceLocked.where((e) => e).length}"),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 15,
-          runSpacing: 15,
-          children: List.generate(5, (index) => buildDie(index)),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: throwsLeft > 0 ? diceRoll : null,
-          child: const Text("Throw"),
-        ),
-        Text("Throws left: $throwsLeft"),
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          //Text("Locked: ${diceLocked.where((e) => e).length}"),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 15,
+            runSpacing: 15,
+            children: List.generate(5, (index) => buildDie(index)),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: throwsLeft > 0 ? diceRoll : null,
+            child: const Text("Throw"),
+          ),
+          Text("Throws left: $throwsLeft"),
+        ],
+      ),
     );
   }
 }
