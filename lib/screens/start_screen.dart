@@ -172,6 +172,10 @@ class StartScreen extends StatelessWidget {
                               },
                               child: Text("OK"),
                             ),
+                            TextButton(
+                              onPressed: () => Navigator.of(ctx).pop(),
+                              child: Text("Cancel"),
+                            ),
                           ],
                         ),
                   );
