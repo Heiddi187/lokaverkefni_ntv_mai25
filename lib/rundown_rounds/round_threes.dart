@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
-import 'dice_build.dart';
-import 'score_tracker.dart';
-import 'yahtzee.dart';
-import 'yahtzee_list.dart';
+import 'package:lokaverkefni/rundown_rounds/round_fours.dart';
+import '../dice/dice_build.dart';
+import '../scoring/score_tracker.dart';
+import '../screens/yahtzee_list.dart';
 
-class LargeStraight extends StatefulWidget {
-  const LargeStraight({super.key});
+class RoundThrees extends StatefulWidget {
+  const RoundThrees({super.key});
 
   @override
-  State<LargeStraight> createState() => _LargeStraightState();
+  State<RoundThrees> createState() => _RoundThreesState();
 }
 
-class _LargeStraightState extends State<LargeStraight> {
+class _RoundThreesState extends State<RoundThrees> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
-    int score = 0;
-
-    // Remove duplicates and sort the list
-    List<int> uniqueSorted = diceValues.toSet().toList()..sort();
-
-    // Convert to string for easier matching
-    String values = uniqueSorted.join();
-
-    // Check if it contains any of these small straight patterns
-    if (values.contains("12345") || values.contains("23456")) {
-      score = 40;
+    int total = 0;
+    for (var value in diceValues) {
+      if (value == 3) {
+        total += 3;
+      }
     }
-    addScoresToList("Large Straight", score);
+    addScoresToList("Threes", total);
     setState(() {
+      score = total;
       showScore = true;
-      this.score = score;
     });
   }
 
@@ -39,7 +33,7 @@ class _LargeStraightState extends State<LargeStraight> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Round Large Straight"),
+        title: Text("Threes Round (count 3's)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -61,9 +55,9 @@ class _LargeStraightState extends State<LargeStraight> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const FullYahtzee()),
-                );
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (ctx) => const RoundFours()));
               },
               child: const Text("Next Round"),
             ),

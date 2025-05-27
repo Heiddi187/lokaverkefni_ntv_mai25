@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/round_threes.dart';
-import 'dice_build.dart';
-import 'score_tracker.dart';
-import 'yahtzee_list.dart';
+import 'package:lokaverkefni/screens/yahtzee_list.dart';
+import '../dice/dice_build.dart';
+import 'round_sixes.dart';
+import '../scoring/score_tracker.dart';
 
-class RoundTwos extends StatefulWidget {
-  const RoundTwos({super.key});
+class RoundFives extends StatefulWidget {
+  const RoundFives({super.key});
 
   @override
-  State<RoundTwos> createState() => _RoundTwosState();
+  State<RoundFives> createState() => _RoundFivesState();
 }
 
-class _RoundTwosState extends State<RoundTwos> {
+class _RoundFivesState extends State<RoundFives> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
     int total = 0;
-    for (int value in diceValues) {
-      if (value == 2) {
-        total += 2;
+    for (var value in diceValues) {
+      if (value == 5) {
+        total += 5;
       }
     }
-    addScoresToList("Twos", total);
+    addScoresToList("Fives", total);
     setState(() {
       score = total;
       showScore = true;
@@ -33,7 +33,7 @@ class _RoundTwosState extends State<RoundTwos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Twos Round (count 2's)"),
+        title: const Text("Round Fives (count 5's)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -55,9 +55,9 @@ class _RoundTwosState extends State<RoundTwos> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const RoundThrees()),
-                );
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (ctx) => const RoundSixes()));
               },
               child: const Text("Next Round"),
             ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/yahtzee_list.dart';
-import 'rules.dart';
+import 'package:lokaverkefni/screens/yahtzee_list.dart';
+import '../widgets/rules.dart';
+import 'free_select_screen.dart';
+
+String selectedGameMode = "";
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -86,6 +89,7 @@ class StartScreen extends StatelessWidget {
                           actions: [
                             TextButton(
                               onPressed: () {
+                                selectedGameMode = "rundown";
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (ctx) => const YahtzeeList(),
@@ -133,7 +137,7 @@ class StartScreen extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  "Upper & Lower \$4.99",
+                  "Upper & Lower",
                   style: TextStyle(decoration: TextDecoration.lineThrough),
                 ),
               ),
@@ -144,7 +148,7 @@ class StartScreen extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey.shade400,
+                  backgroundColor: Colors.grey.shade200,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
@@ -155,20 +159,24 @@ class StartScreen extends StatelessWidget {
                     builder:
                         (ctx) => AlertDialog(
                           title: Text("Free Selection"),
-                          content: Text("In development... \nAvailable soon"),
+                          content: Text(freeSelectionRules),
                           actions: [
                             TextButton(
-                              onPressed: () => Navigator.of(ctx).pop(),
+                              onPressed: () {
+                                selectedGameMode = "freeSelect";
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => const FreeSelectScreen(),
+                                  ),
+                                );
+                              },
                               child: Text("OK"),
                             ),
                           ],
                         ),
                   );
                 },
-                child: Text(
-                  "Free Selection \$9.99",
-                  style: TextStyle(decoration: TextDecoration.lineThrough),
-                ),
+                child: Text("Free Selection"),
               ),
             ),
           ],

@@ -1,21 +1,21 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 final randomizer = Random();
 
-class DiceRoller4 extends StatefulWidget {
-  const DiceRoller4({super.key});
+class DiceSet extends StatefulWidget {
+  final void Function(List<int>) onFinished;
+
+  const DiceSet({required this.onFinished, super.key});
 
   @override
-  State<DiceRoller4> createState() => _DiceRoller4State();
+  State<DiceSet> createState() => _DiceSetState();
 }
 
-class _DiceRoller4State extends State<DiceRoller4> {
+class _DiceSetState extends State<DiceSet> {
+  int throwsLeft = 3;
   List<int> diceValues = [1, 1, 1, 1, 1];
   List<bool> diceLocked = [false, false, false, false, false];
-  int throwsLeft = 3;
   bool hasRolled = false;
 
   void diceRoll() {
@@ -29,6 +29,10 @@ class _DiceRoller4State extends State<DiceRoller4> {
       }
       throwsLeft--;
       hasRolled = true;
+
+      if (throwsLeft == 0) {
+        widget.onFinished(diceValues);
+      }
     });
   }
 
@@ -41,55 +45,44 @@ class _DiceRoller4State extends State<DiceRoller4> {
   }
 
   Widget buildDie(int index) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          onPressed: hasRolled ? () => dieIsLocked(index) : null,
-          iconSize: 100,
-          icon: Image.asset(
+    return IconButton(
+      onPressed: hasRolled ? () => dieIsLocked(index) : null,
+      iconSize: 100,
+      icon: Stack(
+        children: [
+          Image.asset(
             "dice_images/dice-six-faces-${diceValues[index]}.png",
             height: 100,
           ),
-        ),
-        if (diceLocked[index])
-          Container(
-            height: 100,
-            width: 100,
-            color: Colors.black.withValues(alpha: 0.5),
-          ),
-      ],
+          if (diceLocked[index])
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.black.withValues(alpha: 0.5),
+            ),
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Locked: ${diceLocked.where((e) => e).length} | Throws Left: $throwsLeft',
-        ),
-      ),
-      body: Column(
+    return Center(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Wrap(
             alignment: WrapAlignment.center,
             spacing: 15,
             runSpacing: 15,
-            children: [
-              buildDie(0),
-              buildDie(1),
-              buildDie(2),
-              buildDie(3),
-              buildDie(4),
-            ],
+            children: List.generate(5, (index) => buildDie(index)),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: throwsLeft > 0 ? diceRoll : null,
-            child: const Text("Throw", style: TextStyle(fontSize: 20)),
+            child: const Text("Throw"),
           ),
+          Text("Throws left: $throwsLeft"),
         ],
       ),
     );

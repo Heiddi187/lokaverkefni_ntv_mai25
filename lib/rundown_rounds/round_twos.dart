@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/round_fours.dart';
-import 'dice_build.dart';
-import 'score_tracker.dart';
-import 'yahtzee_list.dart';
+import 'package:lokaverkefni/rundown_rounds/round_threes.dart';
+import '../dice/dice_build.dart';
+import '../scoring/score_tracker.dart';
+import '../screens/yahtzee_list.dart';
 
-class RoundThrees extends StatefulWidget {
-  const RoundThrees({super.key});
+class RoundTwos extends StatefulWidget {
+  const RoundTwos({super.key});
 
   @override
-  State<RoundThrees> createState() => _RoundThreesState();
+  State<RoundTwos> createState() => _RoundTwosState();
 }
 
-class _RoundThreesState extends State<RoundThrees> {
+class _RoundTwosState extends State<RoundTwos> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
     int total = 0;
-    for (var value in diceValues) {
-      if (value == 3) {
-        total += 3;
+    for (int value in diceValues) {
+      if (value == 2) {
+        total += 2;
       }
     }
-    addScoresToList("Threes", total);
+    addScoresToList("Twos", total);
     setState(() {
       score = total;
       showScore = true;
@@ -33,7 +33,7 @@ class _RoundThreesState extends State<RoundThrees> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Threes Round (count 3's)"),
+        title: Text("Twos Round (count 2's)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -55,9 +55,9 @@ class _RoundThreesState extends State<RoundThrees> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (ctx) => const RoundFours()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => const RoundThrees()),
+                );
               },
               child: const Text("Next Round"),
             ),

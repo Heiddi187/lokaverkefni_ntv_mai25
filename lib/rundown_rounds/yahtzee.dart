@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
-import 'dice_build.dart';
-import 'score_tracker.dart';
-import 'large_straight.dart';
-import 'yahtzee_list.dart';
+import '../dice/dice_build.dart';
+import '../scoring/score_tracker.dart';
+import 'chance.dart';
+import '../screens/yahtzee_list.dart';
 
-class SmallStraight extends StatefulWidget {
-  const SmallStraight({super.key});
+class FullYahtzee extends StatefulWidget {
+  const FullYahtzee({super.key});
 
   @override
-  State<SmallStraight> createState() => _SmallStraightState();
+  State<FullYahtzee> createState() => _FullYahtzeeState();
 }
 
-class _SmallStraightState extends State<SmallStraight> {
+class _FullYahtzeeState extends State<FullYahtzee> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
     int score = 0;
-
-    // Remove duplicates and sort the list
-    List<int> uniqueSorted = diceValues.toSet().toList()..sort();
-
-    // Convert to string for easier matching
-    String values = uniqueSorted.join();
-
-    // Check if it contains any of these small straight patterns
-    if (values.contains("1234") ||
-        values.contains("2345") ||
-        values.contains("3456")) {
-      score = 30;
+    List<int> sorted = List.from(diceValues)..sort();
+    String diceString = sorted.join();
+    if (diceString.contains("11111") ||
+        diceString.contains("22221") ||
+        diceString.contains("33333") ||
+        diceString.contains("44444") ||
+        diceString.contains("55555") ||
+        diceString.contains("66666")) {
+      score = 50;
     }
-    addScoresToList("Small Straight", score);
+    addScoresToList("Yahtzee", score);
     setState(() {
       showScore = true;
       this.score = score;
@@ -41,7 +38,7 @@ class _SmallStraightState extends State<SmallStraight> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Round Small Straight"),
+        title: const Text("Yahtzee (Five of a kind)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -64,7 +61,7 @@ class _SmallStraightState extends State<SmallStraight> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const LargeStraight()),
+                  MaterialPageRoute(builder: (ctx) => const ChanceRound()),
                 );
               },
               child: const Text("Next Round"),

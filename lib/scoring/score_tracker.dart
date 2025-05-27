@@ -1,7 +1,23 @@
-import 'package:flutter/material.dart';
+List<String> allCategories = [
+  "Aces",
+  "Twos",
+  "Threes",
+  "Fours",
+  "Fives",
+  "Sixes",
+  "Three of a Kind",
+  "Four of a Kind",
+  "Full House",
+  "Small Straight",
+  "Large Straight",
+  "Yahtzee",
+  "Chance",
+];
 
 List<String> nameOfRound = [];
 List<int> scoreOfRound = [];
+Map<String, int> scoredPoints = {};
+Set<String> usedCategories = {};
 
 void addScoresToList(String round, int score) {
   int indexOf = nameOfRound.indexOf(round);
@@ -20,4 +36,6 @@ int get totalScore {
 void resetScores() {
   nameOfRound.clear();
   scoreOfRound.clear();
+  scoredPoints.clear();
+  usedCategories.clear();
 }

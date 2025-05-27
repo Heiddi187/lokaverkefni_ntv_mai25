@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/round_twos.dart';
-import 'dice_build.dart';
-import 'score_tracker.dart';
-import 'final_tally_screen.dart';
-import 'yahtzee_list.dart';
+import '../dice/dice_build.dart';
+import '../scoring/score_tracker.dart';
+import '../screens/final_tally_screen.dart';
+import '../screens/yahtzee_list.dart';
 
-class RoundAces extends StatefulWidget {
-  const RoundAces({super.key});
+class ChanceRound extends StatefulWidget {
+  const ChanceRound({super.key});
 
   @override
-  State<RoundAces> createState() => _RoundAcesState();
+  State<ChanceRound> createState() => _ChanceRoundState();
 }
 
-class _RoundAcesState extends State<RoundAces> {
+class _ChanceRoundState extends State<ChanceRound> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
     int total = 0;
-    for (int value in diceValues) {
-      if (value == 1) {
-        total += 1;
-      }
+    for (var value in diceValues) {
+      total += value;
     }
-    addScoresToList("Aces", total);
+    addScoresToList("Chance", total);
     setState(() {
       score = total;
       showScore = true;
@@ -34,7 +31,7 @@ class _RoundAcesState extends State<RoundAces> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Aces Round (count 1's)"),
+        title: const Text("Round Chance (highest total)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -56,9 +53,9 @@ class _RoundAcesState extends State<RoundAces> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (ctx) => const RoundTwos()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => const FinalScoreTally()),
+                );
               },
               child: const Text("Next Round"),
             ),

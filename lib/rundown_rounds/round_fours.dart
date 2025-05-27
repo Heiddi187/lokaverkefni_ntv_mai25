@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-import 'dice_build.dart';
-import 'score_tracker.dart';
-import 'final_tally_screen.dart';
-import 'yahtzee_list.dart';
+import 'package:lokaverkefni/screens/yahtzee_list.dart';
+import '../dice/dice_build.dart';
+import 'round_fives.dart';
+import '../scoring/score_tracker.dart';
 
-class ChanceRound extends StatefulWidget {
-  const ChanceRound({super.key});
+class RoundFours extends StatefulWidget {
+  const RoundFours({super.key});
 
   @override
-  State<ChanceRound> createState() => _ChanceRoundState();
+  State<RoundFours> createState() => _RoundFoursState();
 }
 
-class _ChanceRoundState extends State<ChanceRound> {
+class _RoundFoursState extends State<RoundFours> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
     int total = 0;
     for (var value in diceValues) {
-      total += value;
+      if (value == 4) {
+        total += 4;
+      }
     }
-    addScoresToList("Chance", total);
+    addScoresToList("Fours", total);
     setState(() {
       score = total;
       showScore = true;
@@ -31,7 +33,7 @@ class _ChanceRoundState extends State<ChanceRound> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Round Chance (highest total)"),
+        title: const Text("Round Fours (count 4's)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -53,9 +55,9 @@ class _ChanceRoundState extends State<ChanceRound> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const FinalScoreTally()),
-                );
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (ctx) => const RoundFives()));
               },
               child: const Text("Next Round"),
             ),

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/chance.dart';
-import 'package:lokaverkefni/four_of_a_kind.dart';
-import 'package:lokaverkefni/full_house.dart';
-import 'package:lokaverkefni/large_straight.dart';
-import 'package:lokaverkefni/round_fives.dart';
-import 'package:lokaverkefni/round_fours.dart';
-import 'package:lokaverkefni/round_sixes.dart';
-import 'package:lokaverkefni/round_threes.dart';
-import 'package:lokaverkefni/round_twos.dart';
-import 'package:lokaverkefni/small_straight.dart';
-import 'package:lokaverkefni/three_of_a_kind.dart';
-import 'package:lokaverkefni/yahtzee.dart';
-import 'round_aces.dart';
-import 'list_box.dart';
+import 'package:lokaverkefni/rundown_rounds/chance.dart';
+import 'package:lokaverkefni/rundown_rounds/four_of_a_kind.dart';
+import 'package:lokaverkefni/rundown_rounds/full_house.dart';
+import 'package:lokaverkefni/rundown_rounds/large_straight.dart';
+import 'package:lokaverkefni/rundown_rounds/round_fives.dart';
+import 'package:lokaverkefni/rundown_rounds/round_fours.dart';
+import 'package:lokaverkefni/rundown_rounds/round_sixes.dart';
+import 'package:lokaverkefni/rundown_rounds/round_threes.dart';
+import 'package:lokaverkefni/rundown_rounds/round_twos.dart';
+import 'package:lokaverkefni/rundown_rounds/small_straight.dart';
+import 'package:lokaverkefni/rundown_rounds/three_of_a_kind.dart';
+import 'package:lokaverkefni/rundown_rounds/yahtzee.dart';
+import '../rundown_rounds/round_aces.dart';
+import '../widgets/list_box.dart';
 
 class YahtzeeList extends StatefulWidget {
   const YahtzeeList({super.key});
@@ -29,25 +29,9 @@ class _YahtzeeListState extends State<YahtzeeList> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
-              children: [
-                Text(
-                  "Yahtzee",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    foreground:
-                        Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 3
-                          ..color = Colors.white,
-                  ),
-                ),
-                Text(
-                  "Yahtzee",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ],
+            Text(
+              "Yahtzee",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             SizedBox(

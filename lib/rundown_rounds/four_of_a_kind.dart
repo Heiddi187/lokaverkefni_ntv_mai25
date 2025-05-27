@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/yahtzee_list.dart';
-import 'dice_build.dart';
-import 'three_of_a_kind.dart';
-import 'score_tracker.dart';
-import 'yahtzee_list.dart';
+import '../dice/dice_build.dart';
+import 'full_house.dart';
+import '../scoring/score_tracker.dart';
+import '../screens/yahtzee_list.dart';
 
-class RoundSixes extends StatefulWidget {
-  const RoundSixes({super.key});
+class FourOfaKind extends StatefulWidget {
+  const FourOfaKind({super.key});
 
   @override
-  State<RoundSixes> createState() => _RoundSixesState();
+  State<FourOfaKind> createState() => _FourOfaKindState();
 }
 
-class _RoundSixesState extends State<RoundSixes> {
+class _FourOfaKindState extends State<FourOfaKind> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
-    int total = 0;
-    for (var value in diceValues) {
-      if (value == 6) {
-        total += 6;
-      }
+    int score = 0;
+    List<int> sorted = List.from(diceValues)..sort();
+    String diceString = sorted.join();
+    if (diceString.contains("1111") ||
+        diceString.contains("2222") ||
+        diceString.contains("3333") ||
+        diceString.contains("4444") ||
+        diceString.contains("5555") ||
+        diceString.contains("6666")) {
+      score = diceValues.reduce((a, b) => a + b);
     }
-    addScoresToList("Sixes", total);
+    addScoresToList("4 of a kind", score);
     setState(() {
-      score = total;
       showScore = true;
+      this.score = score;
     });
   }
 
@@ -34,7 +38,7 @@ class _RoundSixesState extends State<RoundSixes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Round Sixes (count 6's)"),
+        title: const Text("Round Four of a kind"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -56,9 +60,9 @@ class _RoundSixesState extends State<RoundSixes> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const ThreeOfaKind()),
-                );
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (ctx) => const FullHouse()));
               },
               child: const Text("Next Round"),
             ),

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lokaverkefni/yahtzee_list.dart';
-import 'dice_build.dart';
-import 'round_fives.dart';
-import 'score_tracker.dart';
+import 'package:lokaverkefni/screens/yahtzee_list.dart';
+import '../dice/dice_build.dart';
+import 'three_of_a_kind.dart';
+import '../scoring/score_tracker.dart';
 
-class RoundFours extends StatefulWidget {
-  const RoundFours({super.key});
+class RoundSixes extends StatefulWidget {
+  const RoundSixes({super.key});
 
   @override
-  State<RoundFours> createState() => _RoundFoursState();
+  State<RoundSixes> createState() => _RoundSixesState();
 }
 
-class _RoundFoursState extends State<RoundFours> {
+class _RoundSixesState extends State<RoundSixes> {
   int score = 0;
   bool showScore = false;
 
   void scoreRound(List<int> diceValues) {
     int total = 0;
     for (var value in diceValues) {
-      if (value == 4) {
-        total += 4;
+      if (value == 6) {
+        total += 6;
       }
     }
-    addScoresToList("Fours", total);
+    addScoresToList("Sixes", total);
     setState(() {
       score = total;
       showScore = true;
@@ -33,7 +33,7 @@ class _RoundFoursState extends State<RoundFours> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Round Fours (count 4's)"),
+        title: const Text("Round Sixes (count 6's)"),
         leading: BackButton(
           onPressed: () {
             Navigator.of(
@@ -55,9 +55,9 @@ class _RoundFoursState extends State<RoundFours> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (ctx) => const RoundFives()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => const ThreeOfaKind()),
+                );
               },
               child: const Text("Next Round"),
             ),
