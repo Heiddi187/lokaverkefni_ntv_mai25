@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lokaverkefni/yahtzee_list.dart';
 import 'dice_build.dart';
-import 'round_fives.dart'; // or next round
+import 'round_fives.dart';
+import 'score_tracker.dart';
 
 class RoundFours extends StatefulWidget {
   const RoundFours({super.key});
@@ -20,6 +22,7 @@ class _RoundFoursState extends State<RoundFours> {
         total += 4;
       }
     }
+    addScoresToList("Fours", total);
     setState(() {
       score = total;
       showScore = true;
@@ -29,7 +32,16 @@ class _RoundFoursState extends State<RoundFours> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Round Fours (count 4's)")),
+      appBar: AppBar(
+        title: const Text("Round Fours (count 4's)"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dice_build.dart';
-import 'yahtzee_list.dart';
+import 'score_tracker.dart';
 import 'chance.dart';
+import 'yahtzee_list.dart';
 
 class FullYahtzee extends StatefulWidget {
   const FullYahtzee({super.key});
@@ -69,7 +70,7 @@ class _FullYahtzeeState extends State<FullYahtzee> {
         diceString.contains("66666")) {
       score = 50;
     }
-
+    addScoresToList("Yahtzee", score);
     setState(() {
       showScore = true;
       this.score = score;
@@ -79,7 +80,16 @@ class _FullYahtzeeState extends State<FullYahtzee> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Yahtzee (Five of a kind)")),
+      appBar: AppBar(
+        title: const Text("Yahtzee (Five of a kind)"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

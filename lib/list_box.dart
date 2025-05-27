@@ -26,25 +26,9 @@ class YahtzeeListBox extends StatelessWidget {
           ),
           child: Row(
             children: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder:
-                        (ctx) => AlertDialog(
-                          title: Text("Rules of $roundTitle"),
-                          content: Text(roundRules),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(ctx).pop(),
-                              child: Text("OK"),
-                            ),
-                          ],
-                        ),
-                  );
-                },
-                icon: Icon(Icons.info, color: Colors.transparent),
-              ), // veit að þetta er ekki optimal en fann ekki auðvelda leið til að fá textann í miðjunna
+              SizedBox(
+                width: 48,
+              ), // sá í devTools að iconbutton er w:48, sett þetta inn til að fá texta í miðja miðju
               Expanded(
                 child: TextButton(
                   onPressed: () {

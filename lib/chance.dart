@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dice_build.dart';
+import 'score_tracker.dart';
+import 'final_tally_screen.dart';
 import 'yahtzee_list.dart';
-import 'three_of_a_kind.dart';
 
 class ChanceRound extends StatefulWidget {
   const ChanceRound({super.key});
@@ -19,6 +20,7 @@ class _ChanceRoundState extends State<ChanceRound> {
     for (var value in diceValues) {
       total += value;
     }
+    addScoresToList("Chance", total);
     setState(() {
       score = total;
       showScore = true;
@@ -28,7 +30,16 @@ class _ChanceRoundState extends State<ChanceRound> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Round Chance (highest total)")),
+      appBar: AppBar(
+        title: const Text("Round Chance (highest total)"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,7 +54,7 @@ class _ChanceRoundState extends State<ChanceRound> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => const ThreeOfaKind()),
+                  MaterialPageRoute(builder: (ctx) => const FinalScoreTally()),
                 );
               },
               child: const Text("Next Round"),

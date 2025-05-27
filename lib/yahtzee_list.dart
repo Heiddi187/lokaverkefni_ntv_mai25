@@ -29,9 +29,25 @@ class _YahtzeeListState extends State<YahtzeeList> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "How to play Yahtzee",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Stack(
+              children: [
+                Text(
+                  "Yahtzee",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    foreground:
+                        Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 3
+                          ..color = Colors.white,
+                  ),
+                ),
+                Text(
+                  "Yahtzee",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
             SizedBox(height: 20),
             SizedBox(
@@ -40,7 +56,7 @@ class _YahtzeeListState extends State<YahtzeeList> {
               child: ListView(
                 children: [
                   Text(
-                    "Upper row",
+                    "Upper section",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
                   ),
@@ -75,7 +91,7 @@ class _YahtzeeListState extends State<YahtzeeList> {
                     whichRound: RoundSixes(),
                   ),
                   Text(
-                    "Lower row",
+                    "Lower section",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
                   ),

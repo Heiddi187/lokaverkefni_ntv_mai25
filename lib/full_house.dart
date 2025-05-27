@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lokaverkefni/small_straight.dart';
 import 'dice_build.dart';
+import 'score_tracker.dart';
 import 'yahtzee_list.dart';
 
 class FullHouse extends StatefulWidget {
@@ -43,7 +44,7 @@ class _FullHouseState extends State<FullHouse> {
     } else {
       score = 0;
     }
-
+    addScoresToList("Full House", score);
     // Now show score
     setState(() {
       showScore = true;
@@ -54,7 +55,16 @@ class _FullHouseState extends State<FullHouse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Round Full House")),
+      appBar: AppBar(
+        title: const Text("Round Full House"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

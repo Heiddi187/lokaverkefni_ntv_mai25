@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dice_build.dart';
-import 'yahtzee_list.dart';
+import 'score_tracker.dart';
 import 'large_straight.dart';
+import 'yahtzee_list.dart';
 
 class SmallStraight extends StatefulWidget {
   const SmallStraight({super.key});
@@ -29,7 +30,7 @@ class _SmallStraightState extends State<SmallStraight> {
         values.contains("3456")) {
       score = 30;
     }
-
+    addScoresToList("Small Straight", score);
     setState(() {
       showScore = true;
       this.score = score;
@@ -39,7 +40,16 @@ class _SmallStraightState extends State<SmallStraight> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Round Small Straight")),
+      appBar: AppBar(
+        title: const Text("Round Small Straight"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

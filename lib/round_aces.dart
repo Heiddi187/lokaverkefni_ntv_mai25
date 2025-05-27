@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lokaverkefni/round_twos.dart';
 import 'dice_build.dart';
+import 'score_tracker.dart';
+import 'final_tally_screen.dart';
+import 'yahtzee_list.dart';
 
 class RoundAces extends StatefulWidget {
   const RoundAces({super.key});
@@ -20,6 +23,7 @@ class _RoundAcesState extends State<RoundAces> {
         total += 1;
       }
     }
+    addScoresToList("Aces", total);
     setState(() {
       score = total;
       showScore = true;
@@ -29,7 +33,16 @@ class _RoundAcesState extends State<RoundAces> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Aces Round (count 1's)")),
+      appBar: AppBar(
+        title: Text("Aces Round (count 1's)"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

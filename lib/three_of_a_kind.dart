@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dice_build.dart';
-import 'yahtzee_list.dart';
 import 'four_of_a_kind.dart';
+import 'score_tracker.dart';
+import 'yahtzee_list.dart';
 
 class ThreeOfaKind extends StatefulWidget {
   const ThreeOfaKind({super.key});
@@ -69,7 +70,7 @@ class _ThreeOfaKindState extends State<ThreeOfaKind> {
         diceString.contains("666")) {
       score = diceValues.reduce((a, b) => a + b); // Sum of all dice
     }
-
+    addScoresToList("3 of a kind", score);
     setState(() {
       showScore = true;
       this.score = score;
@@ -79,7 +80,16 @@ class _ThreeOfaKindState extends State<ThreeOfaKind> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Round Three of a kind")),
+      appBar: AppBar(
+        title: const Text("Round Three of a kind"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

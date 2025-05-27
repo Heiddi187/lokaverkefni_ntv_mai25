@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dice_build.dart';
-import 'yahtzee_list.dart';
+import 'score_tracker.dart';
 import 'yahtzee.dart';
+import 'yahtzee_list.dart';
 
 class LargeStraight extends StatefulWidget {
   const LargeStraight({super.key});
@@ -27,7 +28,7 @@ class _LargeStraightState extends State<LargeStraight> {
     if (values.contains("12345") || values.contains("23456")) {
       score = 40;
     }
-
+    addScoresToList("Large Straight", score);
     setState(() {
       showScore = true;
       this.score = score;
@@ -37,7 +38,16 @@ class _LargeStraightState extends State<LargeStraight> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Round Large Straight")),
+      appBar: AppBar(
+        title: const Text("Round Large Straight"),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => YahtzeeList()));
+          },
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
